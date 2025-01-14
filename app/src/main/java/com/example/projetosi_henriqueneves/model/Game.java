@@ -6,18 +6,18 @@ public class Game {
 
     private int id;
     private double price;
-    private String name, coverbase64, description, dev_name, pub_name;
+    private String name, coverbase64, description, developer_name, publisher_name;
     private Date releasedate;
 
-    public Game(int id, double price, String coverbase64, String name, String description, String dev_name, String pub_name, Date releasedate) {
+    public Game(int id, String name, String coverbase64, String description, String developer_name, String publisher_name, Date releasedate, double price) {
         this.id = id;
-        this.price = price;
         this.name = name;
         this.coverbase64 = coverbase64;
         this.description = description;
-        this.dev_name = dev_name;
-        this.pub_name = pub_name;
+        this.developer_name = developer_name;
+        this.publisher_name = publisher_name;
         this.releasedate = releasedate;
+        this.price = price;
     }
 
     public int getId(){
@@ -28,36 +28,12 @@ public class Game {
         this.id = id;
     }
 
-    public Date getReleasedate() {
-        return releasedate;
+    public String getName() {
+        return name;
     }
 
-    public void setReleasedate(Date releasedate) {
-        this.releasedate = releasedate;
-    }
-
-    public String getPub_name() {
-        return pub_name;
-    }
-
-    public void setPub_name(String pub_name) {
-        this.pub_name = pub_name;
-    }
-
-    public String getDev_name() {
-        return dev_name;
-    }
-
-    public void setDev_name(String dev_name) {
-        this.dev_name = dev_name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCoverbase64() {
@@ -68,12 +44,36 @@ public class Game {
         this.coverbase64 = coverbase64;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDeveloper_name() {
+        return developer_name;
+    }
+
+    public void setDeveloper_name(String developer_name) {
+        this.developer_name = developer_name;
+    }
+
+    public String getPublisher_name() {
+        return publisher_name;
+    }
+
+    public void setPublisher_name(String publisher_name) {
+        this.publisher_name = publisher_name;
+    }
+
+    public Date getReleasedate() {
+        return releasedate;
+    }
+
+    public void setReleasedate(Date releasedate) {
+        this.releasedate = releasedate;
     }
 
     public double getPrice() {
