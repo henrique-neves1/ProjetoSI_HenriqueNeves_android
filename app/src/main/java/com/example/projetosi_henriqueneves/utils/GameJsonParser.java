@@ -26,7 +26,7 @@ public class GameJsonParser {
                 String description = game.getString("description");
                 String developerName = game.getString("developer_name");
                 String publisherName = game.getString("publisher_name");
-                Date releaseDate = game.getString("releasedate");
+                String releaseDate = game.getString("releasedate");
                 double price = game.getDouble("price");
 
                 Game auxGame = new Game(id, name, coverBase64, description, developerName, publisherName, releaseDate, price);
@@ -45,12 +45,13 @@ public class GameJsonParser {
             int id = game.getInt("id");
             String name = game.getString("name");
             String coverBase64 = game.getString("cover_base64");
+            String description = game.getString("description");
             String developerName = game.getString("developer_name");
             String publisherName = game.getString("publisher_name");
             String releaseDate = game.getString("releasedate");
             double price = game.getDouble("price");
 
-            auxGame = new Game(id, name, coverBase64, developerName, publisherName, releaseDate, price);
+            auxGame = new Game(id, name, coverBase64, description, developerName, publisherName, releaseDate, price);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }

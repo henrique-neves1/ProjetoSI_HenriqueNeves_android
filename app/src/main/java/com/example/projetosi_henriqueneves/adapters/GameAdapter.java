@@ -1,6 +1,9 @@
 package com.example.projetosi_henriqueneves.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,24 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.projetosi_henriqueneves.R;
 import com.example.projetosi_henriqueneves.model.Game;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class GameAdapter extends BaseAdapter {
-    private List<Game> games;
+
     private Context context;
-    private OnGameClickListener listener;
+    private LayoutInflater inflater;
+    private ArrayList<Game> games;
 
-    public interface OnGameClickListener {
-        void onGameClick(Game game);
-    }
-
-    public GameAdapter(Context context, List<Game> games, OnGameClickListener listener) {
-        this.context = context;
+    public GameAdapter(ArrayList<Game> games, Context context) {
         this.games = games;
-        this.listener = listener;
+        this.context = context;
     }
 
     @Override
@@ -41,45 +41,39 @@ public class GameAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return games.get(position).getId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            // Inflate the item layout
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_game, parent, false);
-
-            // Initialize the ViewHolder
-            holder = new ViewHolder();
-            holder.cover = convertView.findViewById(R.id.cover);
-            holder.name = convertView.findViewById(R.id.name);
-            holder.price = convertView.findViewById(R.id.price);
-            convertView.setTag(holder);
-        } else {
-            // Reuse the ViewHolder
-            holder = (ViewHolder) convertView.getTag();
+        if (inflater == null) {
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
-        // Get the current game
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.item_game_list, null);
+        }
+
+        ImageView imgGameCover = convertView.findViewById(R.id.imgCover);
+        TextView tvGameName = convertView.findViewById(R.id.tvName);
+        TextView tvGamePrice = convertView.findViewById(R.id.tvPrice);
+
         Game game = games.get(position);
+        tvGameName.setText(game.getName());
+        tvGamePrice.setText(String.format("$%.2f", game.getPrice()));
 
-        // Populate the item with game data
-        Glide.with(context).load(game.getCoverUrl()).into(holder.cover);
-        holder.name.setText(game.getName());
-        holder.price.setText(String.format("$%.2f", game.getPrice()));
-
-        // Set the click listener
-        convertView.setOnClickListener(v -> listener.onGameClick(game));
+        String coverBase64 = game.getCoverbase64();
+        if (coverBase64 != null && !coverBase64.isEmpty()) {
+            byte[] decodedString = Base64.decode(coverBase64, Base64.DEFAULT);
+            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            imgGameCover.setImageBitmap(decodedBitmap);
+        }
 
         return convertView;
     }
 
-    // ViewHolder class for caching view references
-    private static class ViewHolder {
-        ImageView cover;
-        TextView name;
-        TextView price;
+    public void updateGames(ArrayList<Game> newGames) {
+        this.games = games;
+        notifyDataSetChanged();
     }
 }

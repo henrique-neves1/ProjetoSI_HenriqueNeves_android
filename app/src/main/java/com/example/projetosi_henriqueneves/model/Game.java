@@ -6,10 +6,9 @@ public class Game {
 
     private int id;
     private double price;
-    private String name, coverbase64, description, developer_name, publisher_name;
-    private Date releasedate;
+    private String name, coverbase64, description, developer_name, publisher_name, releasedate;
 
-    public Game(int id, String name, String coverbase64, String description, String developer_name, String publisher_name, Date releasedate, double price) {
+    public Game(int id, String name, String coverbase64, String description, String developer_name, String publisher_name, String releasedate, double price) {
         this.id = id;
         this.name = name;
         this.coverbase64 = coverbase64;
@@ -68,11 +67,11 @@ public class Game {
         this.publisher_name = publisher_name;
     }
 
-    public Date getReleasedate() {
+    public String getReleasedate() {
         return releasedate;
     }
 
-    public void setReleasedate(Date releasedate) {
+    public void setReleasedate(String releasedate) {
         this.releasedate = releasedate;
     }
 

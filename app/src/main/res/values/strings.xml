@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">ProjetoSI_HenriqueNeves</string>
-    <string name="txt_email">Introduza email</string>
-    <string name="txt_password">Introduza password</string>
+    <string name="app_name">CommuniGames</string>
+    <string name="txt_username">Insert username</string>
+    <string name="txt_password">Insert password</string>
     <string name="txt_login">Login</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
