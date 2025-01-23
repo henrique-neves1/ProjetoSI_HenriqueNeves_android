@@ -101,6 +101,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         if (item.getItemId() == R.id.nav_games) {
             fragmentTransaction.replace(R.id.fragment_container, new GameListFragment());
             fragmentTransaction.commit();
+        } else if (item.getItemId() == R.id.nav_teste_pratico){
+            fragmentTransaction.replace(R.id.fragment_container, new TestePraticoIndividual());
+            fragmentTransaction.commit();
         } else if (item.getItemId() == R.id.menu_logout){
             SingletonGames singletonGames = SingletonGames.getInstance(this);
             singletonGames.logout(this); // Clear login state
